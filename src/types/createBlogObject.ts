@@ -8,4 +8,4 @@ export const createRequestSchema = zod.object({
 });
 
 
-export type CreateBlog = zod.infer<typeof createRequestSchema>;
+export type CreateBlogObject = zod.infer<typeof createRequestSchema>;

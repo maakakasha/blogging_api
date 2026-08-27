@@ -4,11 +4,11 @@ import express, {
   type NextFunction,
 } from "express";
 
-import BlogOperationsImpl from "./database/ORM/BlogOperationImpl.ts";
-import { createBlogRouter } from "./routers/blogs.ts";
+import BlogORMOperationsImpl from "./database/ORM/BlogOperationImpl.ts";
+import { constructBlogRouter } from "./routers/blogs.ts";
 import errorHandlingMiddleware from "./middleware/errorHandler.ts";
 import { BlogController } from "./controllers/blogs.ts";
-import initialiseSequelize from "./utils/initSequelize.ts";
+import initialiseSequelize from "./database/ORM/tables/initSequelize.ts";
 
 // Basic setup
 const app = express();
@@ -19,11 +19,12 @@ app.use(express.json());
 // app.use(authentication);
 
 // Dependencies
-const sequelize = await initialiseSequelize();
-const blogController = new BlogController(new BlogOperationsImpl(sequelize));
+export const sequelize = await initialiseSequelize();
+
+const blogController = new BlogController(new BlogORMOperationsImpl(sequelize));
 
 // Assigning routers
-app.use("/api/posts", createBlogRouter(blogController));
+app.use("/api/posts", constructBlogRouter(blogController));
 
 async function startServer() {
   try {
