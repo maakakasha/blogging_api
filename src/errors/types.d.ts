@@ -1,1 +1,1 @@
-type ErrorType = "ERR_NF" | "ERR_VAL";
+type ErrorType = "ERR_NF" | "ERR_VAL" | "ERR_DB";

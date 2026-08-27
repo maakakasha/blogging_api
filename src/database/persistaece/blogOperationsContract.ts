@@ -1,10 +1,10 @@
-import { type CreateBlog } from "../../types/createBlog.ts";
+import { type CreateBlogObject } from "../../types/createBlogObject.ts";
 
 export abstract class BlogOperationContract {
-  abstract createBlog(blog: CreateBlog): Promise<CreateBlog>;
-  abstract getBlogById(id: number): Promise<CreateBlog | null>;
-  abstract getAllBlogs(): Promise<CreateBlog[]>;
-  abstract updateBlog(id: number, data: Partial<CreateBlog>): Promise<void>;
+  abstract createBlog(blog: CreateBlogObject): Promise<CreateBlogObject>;
+  abstract getBlogById(id: number): Promise<CreateBlogObject | null>;
+  abstract getAllBlogs(): Promise<CreateBlogObject[]>;
+  abstract updateBlog(id: number, data: Partial<CreateBlogObject>): Promise<void>;
   abstract deleteBlog(id: number): Promise<void>;
-  abstract fitlerBlogsBySearchTerm(term: string): Promise<CreateBlog[]>;
+  abstract fitlerBlogsBySearchTerm(term: string): Promise<CreateBlogObject[]>;
 }

@@ -5,8 +5,10 @@ export const asyncErrorHandlingWrapper =
     try {
       Promise.resolve(fn(req, res, next)).catch((error) => {
         next(error);
+        return;
       });
     } catch (error) {
       next(error);
+      return;
     }
   };

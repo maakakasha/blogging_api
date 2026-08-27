@@ -1,14 +1,14 @@
 import { type Request, type Response, type NextFunction } from "express";
 import { safeParseRequest } from "../utils/requestParser.ts";
-import { type CreateBlog, createRequestSchema } from "../types/createBlog.ts";
+import { type CreateBlogObject, createRequestSchema } from "../types/createBlogObject.ts";
 import { InvalidCreateBlogRequestError } from "../errors/invalidCreateBlogRequestError.ts";
 
 export function validateCreateBlogMiddleWare(
-  req: Request<{}, {}, CreateBlog>,
+  req: Request<{}, {}, CreateBlogObject>,
   res: Response,
   next: NextFunction,
 ) {
-  const parsedReq = safeParseRequest<CreateBlog>(createRequestSchema, req.body);
+  const parsedReq = safeParseRequest<CreateBlogObject>(createRequestSchema, req.body);
 
   if (parsedReq.success) {
     req.body = parsedReq.data;
