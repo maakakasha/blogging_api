@@ -20,11 +20,10 @@ app.use(express.json());
 
 // Dependencies
 export const sequelize = await initialiseSequelize();
-
-const blogController = new BlogController(new BlogORMOperationsImpl(sequelize));
+const blogRouter = constructBlogRouter(new BlogORMOperationsImpl(sequelize));
 
 // Assigning routers
-app.use("/api/posts", constructBlogRouter(blogController));
+app.use("/api/", blogRouter);
 
 async function startServer() {
   try {
